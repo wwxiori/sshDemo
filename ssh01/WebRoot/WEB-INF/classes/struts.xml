@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<!-- package 表示包  name表示包名名字随意起      extends表示集成的意思  extends="struts-default"固定格式-->
+	<package name="student" extends="struts-default">
+	<!-- action 表示跳转页面/请求  name 表示请求名称   class表示当前请求名称的类地址 -->
+		<action name="student" class="com.hu.action.StudentAction">
+		<!-- result表示返回值方式  name表示返回值   <result>标签中间夹杂的内容是跳转的页面或者请求路径-->
+			<result name="studentList">jsp/studentList.jsp</result>
+			<result name="add" type="redirect">student!getStudentList</result>
+			<result name="updateOne" >jsp/studentupdate.jsp</result>
+			<result name="update" type="redirect">student!getStudentList</result>
+			<result name="delete" type="redirect">student!getStudentList</result>
+			<result name="mohu">jsp/studentList.jsp</result>
+		</action>
+	</package>
+	
+	
+</struts>
+

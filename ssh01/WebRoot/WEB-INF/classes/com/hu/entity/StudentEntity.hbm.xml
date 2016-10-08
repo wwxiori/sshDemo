@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<!-- 表示实体类和数据库表的映射 -->
+	<!-- class表示实体类和数据库的数据承载 name表示当前实体类的类地址 table 表示数据库的表名 -->
+	<class name="com.hu.entity.StudentEntity" table="student">
+	<!-- id表示主键, name表示实体类的主键字段名 column表示数据库中表的主键字段名 -->
+		<id name="s_id" column="s_id">
+		<!-- generator表示主键id的生成方式,class表示随机生成32位随机码 -->
+			<generator class="uuid"></generator>
+		</id>
+		<!--property表示实体类和数据库表中其他的字段的映射  -->
+		<property name="s_name" column="s_name"></property>
+		<property name="s_age" column="s_age"></property>
+		
+	</class>
+</hibernate-mapping>

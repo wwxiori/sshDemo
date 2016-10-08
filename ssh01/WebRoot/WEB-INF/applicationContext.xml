@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="gb2312"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+	"http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	<!-- spring管理数据库连接 -->
+	<!-- dataSource表示数据源 -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" > 
+        <property name="driverClassName"> 
+            <value>com.mysql.jdbc.Driver</value> 
+        </property> 
+        <property name="url"> 
+            <value>jdbc:mysql://localhost:3306/dema?characterEncoding=utf-8</value> 
+        </property> 
+        <property name="username"> 
+            <value>root</value> 
+        </property> 
+        <property name="password"> 
+            <value>123</value> 
+        </property>
+    </bean>   
+
+	<!-- 由spring管理hibernate的实体类配置文件 -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource">
+		<!-- 表示映射bean标签的id属性值 -->
+			<ref local="dataSource" />
+		</property>
+		<property name="mappingResources">
+			<list>
+				<value>com/hu/entity/StudentEntity.hbm.xml</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+						org.hibernate.dialect.MySQLDialect
+				</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.jdbc.batch_size">20</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="dao" class="com.hu.dao.impl.DaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="studentService" class="com.hu.service.impl.StudentServiceImpl">
+		<property name="dao" ref="dao"></property>
+	</bean>
+	<bean id="StudentAction" class="com.hu.action.StudentAction"> 
+		<property name="studentService" ref="studentService"></property>
+	</bean>
+	
+</beans>
